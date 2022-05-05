@@ -1,0 +1,1 @@
+Tutorial project to learn Celery with Django.
