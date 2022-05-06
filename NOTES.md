@@ -47,3 +47,20 @@ $ source env/bin/activate
   - `task.state`: State of the task
   - `task.result`: Return value of task (will return Error in case of Exception)
   > `print(task.state, task.result)`
+
+# Flower
+- Real-time monitoring & admin tool for Celery
+- Can easily visualize task status and quicker instant feedback than terminal
+- Add flower to `requirements.txt` & install
+- Spin up flower server: `(env)$ celery -A django_celery_example flower --port=5555`
+- View flower dashboard at `http://localhost:5555`
+- Add few tasks from django shell => Flower dashboard shows tasks with their state, ID, arguments, result, exceptions etc
+- `UUID` column: `id` of `AsyncResult` task object. Can copy UUID of task and view details from Django shell
+```shell
+>>> from celery.result import AsyncResult
+>>> task = AsyncResult('9c62f554-82a3-4718-b9b7-66f425328373')  # replace with your UUID
+>>> task.state
+'FAILURE'
+>>> task.result
+ZeroDivisionError('division by zero')
+```
